@@ -17,7 +17,6 @@ function App() {
       day: '10/10/1987',
       reminder: true
     },
-    ,
     {
       id: Math.random(),
       text: 'Corpo da mensagem 3',
@@ -36,7 +35,21 @@ function App() {
   //Toggle Reminder
   const toggleReminder = (id) => {
 
-    console.log(id);
+    const updatedTask = tasks.map(task => {
+
+      if(task.id === id) {
+
+        const reminder = !task.reminder
+        return {...task, reminder}
+      
+      } else {
+        
+        return task
+      }
+    })
+
+    console.log(updatedTask);
+    setTasks(updatedTask)
   }
 
   return (
