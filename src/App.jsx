@@ -1,29 +1,19 @@
 import React ,{ useState } from 'react';
 import Header from './components/Header';
 import Tasks from './components/Tasks.jsx';
+import AddTask from './components/AddTask.jsx';
 
 function App() {
 
-  const [tasks, setTasks] = useState([
-    {
-      id: Math.random(),
-      text: 'Corpo da mensagem 1',
-      day: '01/02/1984',
-      reminder: true
-    },
-    {
-      id: Math.random(),
-      text: 'Corpo da mensagem 2',
-      day: '10/10/1987',
-      reminder: true
-    },
-    {
-      id: Math.random(),
-      text: 'Corpo da mensagem 3',
-      day: '28/11/2019',
-      reminder: true
-    }
-  ]);
+  const [tasks, setTasks] = useState([]);
+
+  //Add Task 
+  const addTask = (task) => {
+    const id = Math.floor(Math.random() * 1000000)
+
+    const newTask = {id, ...task}
+    setTasks([...tasks, newTask]);
+  }
 
 
   //Delete Tasks
@@ -48,13 +38,13 @@ function App() {
       }
     })
 
-    console.log(updatedTask);
     setTasks(updatedTask)
   }
 
   return (
     <div className="container">
       <Header/>
+      <AddTask onAddTask={addTask}/>
       {tasks.length > 0 
         ? <Tasks 
             tasks={tasks} 

@@ -1,24 +1,38 @@
 import React from 'react'
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaCheck } from 'react-icons/fa';
+
 
 function Task({task, onDelete, onToggleReminder}) {
 
   return (
-    <div className={task.reminder ? "task reminder" : "task"} onDoubleClick={() => onToggleReminder(task.id)}>
+    <div 
+      className={task.reminder ? "task reminder" : "task"} 
+      >
       <h3> 
         {task.text} 
-        <FaTimes 
-          style={styleButtonDelete} 
-          onClick={() => onDelete(task.id)}
-        /> 
+        <div className="icons">
+          <FaCheck
+            style={styleEditDelete}
+            onClick={() => onToggleReminder(task.id)}/>
+          <FaTimes 
+            style={styleButtonDelete} 
+            onClick={() => onDelete(task.id)}
+          /> 
+        </div>
       </h3>
-      <p><strong>Cadastro: </strong>{task.day}</p>
+      <p><strong>Lembrete: </strong>{task.date}</p>
     </div>
   )
 }
 
 const styleButtonDelete  = {
   color: 'red',
+  cursor: 'pointer',
+  marginLeft: '10px'
+}
+
+const styleEditDelete  = {
+  color: 'rgb(195, 209, 0)',
   cursor: 'pointer',
 }
 
