@@ -5,6 +5,7 @@ import AddTask from './components/AddTask.jsx';
 
 function App() {
 
+  const [showTaskForm, setShowTaskForm] = useState(false);
   const [tasks, setTasks] = useState([]);
 
   //Add Task 
@@ -14,7 +15,6 @@ function App() {
     const newTask = {id, ...task}
     setTasks([...tasks, newTask]);
   }
-
 
   //Delete Tasks
   const deleteTask = (id) => {
@@ -41,18 +41,27 @@ function App() {
     setTasks(updatedTask)
   }
 
+  //Toggle show Form
+  const toogleShowForm = () => {
+    
+    setShowTaskForm(!showTaskForm)
+  
+  }
+
   return (
     <div className="container">
-      <Header/>
-      <AddTask onAddTask={addTask}/>
+      <Header onToggleShowForm={toogleShowForm} showTaskForm={showTaskForm} />
+      {showTaskForm && <AddTask onAddTask={addTask}/>}
+      <div className="container-task">
       {tasks.length > 0 
         ? <Tasks 
             tasks={tasks} 
             onDelete={deleteTask}
             onToggleReminder={toggleReminder}
           />
-        : 'Não há mensagens'
+        : 'There is no message'
         }
+      </div>
     </div>
   );
 }

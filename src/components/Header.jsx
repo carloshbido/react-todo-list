@@ -2,16 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import Button from './Button';
 
-function Header({ title }) {
-
-  const onClick = (e) => {
-    console.log(e.target);
-  }
+function Header({ title, onToggleShowForm, showTaskForm}) {
 
   return (
     <header className="header">
       <h1>{title}</h1>
-      <Button onClick={onClick} text="Add" color="black" />
+      <Button 
+        onClick={onToggleShowForm} 
+        text={showTaskForm ? 'Close' : 'Add'} 
+        color={showTaskForm ? '#9b59b6' : '#34495e'}  />
     </header>
   )
 }

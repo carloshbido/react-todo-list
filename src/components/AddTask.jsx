@@ -11,7 +11,7 @@ function AddTask({ onAddTask }) {
 
     if(!text) {
     
-      alert('Insert a task')
+      alert('Fill the Task field')
       return
       
     }

@@ -26,13 +26,13 @@ function Task({task, onDelete, onToggleReminder}) {
 }
 
 const styleButtonDelete  = {
-  color: 'red',
+  color: '#e74c3c',
   cursor: 'pointer',
   marginLeft: '10px'
 }
 
 const styleEditDelete  = {
-  color: 'rgb(195, 209, 0)',
+  color: '#27ae60',
   cursor: 'pointer',
 }
 
