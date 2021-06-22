@@ -15,7 +15,7 @@ function Task({task, onDelete, onToggleReminder}) {
         <div className="icons">
           {task.reminder 
             ? <AiFillBell
-                style={styleEditDelete}
+                style={styleButtonDelete}
                 onClick={() => onToggleReminder(task.id)}/>
             : <FaCheck
                 style={styleEditDelete}
