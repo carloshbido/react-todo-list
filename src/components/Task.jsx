@@ -1,8 +1,5 @@
 import React from 'react'
-import { FaTimes, FaCheck} from 'react-icons/fa';
-import { AiFillBell } from "react-icons/ai";
-
-
+import { FaTimes, FaBell, FaBellSlash} from 'react-icons/fa';
 
 function Task({task, onDelete, onToggleReminder}) {
 
@@ -14,10 +11,10 @@ function Task({task, onDelete, onToggleReminder}) {
         {task.text} 
         <div className="icons">
           {task.reminder 
-            ? <AiFillBell
+            ? <FaBellSlash
                 style={styleButtonDelete}
                 onClick={() => onToggleReminder(task.id)}/>
-            : <FaCheck
+            : <FaBell
                 style={styleEditDelete}
                 onClick={() => onToggleReminder(task.id)}/>
           } 
@@ -27,7 +24,7 @@ function Task({task, onDelete, onToggleReminder}) {
           /> 
         </div>
       </h3>
-      <p><strong>Lembrete: </strong>{task.date}</p>
+      <p><strong>Reminder: </strong>{task.date}</p>
     </div>
   )
 }

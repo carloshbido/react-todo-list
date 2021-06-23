@@ -9,15 +9,26 @@ function AddTask({ onAddTask }) {
     
     e.preventDefault();
 
-    if(!text) {
+    if(!text || !date) {
     
       alert('Fill the Task field')
       return
       
     }
 
+    const currentDate = new Date().getTime();
+    const currentDateDay = new Date().getDate();
+    const dateFromForm = new Date(date).getTime();
+    const dateFromFormDay = new Date(date).getDate() + 1;
+
+    if(currentDate > dateFromForm && currentDateDay > dateFromFormDay) {
+      alert('Date must be after the currenty date')
+      return;
+    }
+
     onAddTask({text, date, reminder});
 
+    // reset form fields
     setText('');
     setDate('');
     setReminder(false);
@@ -35,7 +46,7 @@ function AddTask({ onAddTask }) {
           onChange={(e) => setText(e.target.value)}/>
       </div>
       <div className="form-control">
-        <label>Date</label>
+        <label>Finish at</label>
         <input 
           type="date" 
           placeholder="Add Date"
