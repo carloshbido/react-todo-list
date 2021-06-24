@@ -1,4 +1,4 @@
-import React ,{ useState } from 'react';
+import React ,{ useState, useEffect } from 'react';
 import Header from './components/Header';
 import Tasks from './components/Tasks.jsx';
 import AddTask from './components/AddTask.jsx';
@@ -8,12 +8,43 @@ function App() {
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [tasks, setTasks] = useState([]);
 
+  const getTaskLocal = () => {
+
+    let storageTasks;
+
+    if (localStorage.getItem('tasks') === null) {
+    
+      storageTasks = []
+
+    } else {
+    
+      storageTasks = JSON.parse(localStorage.getItem('tasks'));
+
+    }
+
+    return storageTasks
+      
+  }
+
+  //Init Task
+
+  useEffect(() => {
+
+    setTasks(getTaskLocal());
+    
+  }, [])
+
   //Add Task 
   const addTask = (task) => {
     const id = Math.floor(Math.random() * 1000000)
 
-    const newTask = {id, ...task}
+    const newTask = {id, ...task};
     setTasks([...tasks, newTask]);
+
+    //localStorage
+    let localStorageData = getTaskLocal();
+    localStorageData.push(newTask);
+    localStorage.setItem('tasks', JSON.stringify(localStorageData));
   }
 
   //Delete Tasks
