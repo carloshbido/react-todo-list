@@ -27,7 +27,6 @@ function App() {
   }
 
   //Init Task
-
   useEffect(() => {
 
     setTasks(getTaskLocal());
@@ -39,37 +38,54 @@ function App() {
     const id = Math.floor(Math.random() * 1000000)
 
     const newTask = {id, ...task};
-    setTasks([...tasks, newTask]);
 
     //localStorage
     let localStorageData = getTaskLocal();
     localStorageData.push(newTask);
     localStorage.setItem('tasks', JSON.stringify(localStorageData));
+
+    //Update DOM.
+    setTasks(getTaskLocal());
   }
 
   //Delete Tasks
   const deleteTask = (id) => {
-    const newTasksArray = tasks.filter(task => task.id !== id);
-    setTasks(newTasksArray);
+    
+    let localStorageData = getTaskLocal();
+
+    localStorageData.forEach((task, index)=> {
+
+        if(task.id === id) {
+        
+          localStorageData.splice(index, 1)
+        }
+
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(localStorageData));
+    setTasks(getTaskLocal());
   }
 
   //Toggle Reminder
   const toggleReminder = (id) => {
 
-    const updatedTask = tasks.map(task => {
+    // let localStorageData = getTaskLocal();
 
-      if(task.id === id) {
+    // localStorageData = localStorageData.map((task) => {
 
-        const reminder = !task.reminder
-        return {...task, reminder}
-      
-      } else {
+    //     if(task.id === id) {
+
+    //       [...task, !task.reminder];
+
+    //     } else {
         
-        return task
-      }
-    })
-
-    setTasks(updatedTask)
+    //       task
+    //     }
+      
+    //   });
+    
+    // localStorage.setItem('tasks', JSON.stringify(localStorageData));
+    // setTasks(getTaskLocal());
   }
 
   //Toggle show Form
