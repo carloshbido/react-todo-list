@@ -1,28 +1,29 @@
-# EN-US
- This project was created by Carlos Bido
+## EN-US
+This project was created by Carlos Bido
 
- It is a project to show my skills with ReactJs, Hooks concepts. Completed CRUD.
+It is a project to show my skills with ReactJs, Hooks concepts. Completed CRUD.
 
- ### `npm start`
+[Demo](https://wonderful-brown-277ea9.netlify.app).
 
- Runs the app in the development mode.\
- Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `npm start`
 
- The page will reload if you make edits.\
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
- [Access to project](Link soon).
+The page will reload if you make edits.\
 
-# PT-BR
 
-  Este projeto foi criado por Carlos Bido
+## PT-BR
 
- É um projeto para mostrar meus conhecimentos com ReactJs, conceitos de Hooks. CRUD Completo.
+Este projeto foi criado por Carlos Bido
 
- ### `npm start`
+É um projeto para mostrar meus conhecimentos com ReactJs, conceitos de Hooks. CRUD Completo.
 
- Abra o aplicativo em modo de desenvolvimento.\
- Abra o [http://localhost:3000](http://localhost:3000) para ve-lô no browser.
+[Demonstração](https://wonderful-brown-277ea9.netlify.app).
 
- A página fará o load automático se editar o código.
+### `npm start`
 
- [Acesso ao projeto](Link em breve).
+Abra o aplicativo em modo de desenvolvimento.\
+Abra o [http://localhost:3000](http://localhost:3000) para ve-lô no browser.
+
+A página fará o load automático se editar o código.
