@@ -7,6 +7,10 @@ body {
   box-sizing: border-box;
 }
 
+.main {
+  position: relative;
+}
+
 .container {
   margin: auto;
   max-width: 90%;
@@ -94,5 +98,24 @@ body {
   border-radius: 3px;
   border: none;
   cursor: pointer;
+}
+
+.message {
+  background-color: #e74c3c;
+  color: #e5e5e5;
+  width: 400px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.message span {
+  cursor: pointer;
+  font-size: large;
 }
 

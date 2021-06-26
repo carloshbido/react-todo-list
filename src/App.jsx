@@ -2,12 +2,23 @@ import React ,{ useState, useEffect } from 'react';
 import Header from './components/Header';
 import Tasks from './components/Tasks.jsx';
 import AddTask from './components/AddTask.jsx';
+import Alert from './components/Alert';
 
 function App() {
 
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [alert, setAlert] = useState(false);
+  const [message, setMessage] = useState('');
 
+  //Init Task
+  useEffect(() => {
+
+    setTasks(getTaskLocal());
+    
+  }, [])
+
+  //Get Data from LocalStorage
   const getTaskLocal = () => {
 
     let storageTasks;
@@ -25,13 +36,6 @@ function App() {
     return storageTasks
       
   }
-
-  //Init Task
-  useEffect(() => {
-
-    setTasks(getTaskLocal());
-    
-  }, [])
 
   //Add Task 
   const addTask = (task) => {
@@ -57,7 +61,7 @@ function App() {
 
         if(task.id === id) {
         
-          localStorageData.splice(index, 1)
+          localStorageData.splice(index, 1);
         }
 
     });
@@ -69,23 +73,23 @@ function App() {
   //Toggle Reminder
   const toggleReminder = (id) => {
 
-    // let localStorageData = getTaskLocal();
+    const localStorageData = getTaskLocal();
 
-    // localStorageData = localStorageData.map((task) => {
+    const newData = localStorageData.map((task) => {
 
-    //     if(task.id === id) {
+      if(task.id === id) {
 
-    //       [...task, !task.reminder];
+        return {...task, reminder: !task.reminder};
 
-    //     } else {
-        
-    //       task
-    //     }
+      } else {
       
-    //   });
-    
-    // localStorage.setItem('tasks', JSON.stringify(localStorageData));
-    // setTasks(getTaskLocal());
+        return task
+      }
+      
+    });
+      
+    localStorage.setItem('tasks', JSON.stringify(newData));
+    setTasks(getTaskLocal());
   }
 
   //Toggle show Form
@@ -95,19 +99,47 @@ function App() {
   
   }
 
+  //show Alert
+  const showAlert = (message) => {
+    
+    setAlert(true)
+    setMessage(message)
+  
+    setTimeout(() => {
+      setAlert(false)
+    },4000)
+
+  }
+
+  //close Alert
+  const closeAlert = () => {
+    setAlert(false);
+  }
+
   return (
-    <div className="container">
-      <Header onToggleShowForm={toogleShowForm} showTaskForm={showTaskForm} />
-      {showTaskForm && <AddTask onAddTask={addTask}/>}
-      <div className="container-task">
-      {tasks.length > 0 
-        ? <Tasks 
-            tasks={tasks} 
-            onDelete={deleteTask}
-            onToggleReminder={toggleReminder}
-          />
-        : 'There is no message'
-        }
+    <div className="main">
+      
+      {alert && <Alert message={message} onCloseAlert={closeAlert}/>}
+      
+      <div className="container">
+        <Header onToggleShowForm={toogleShowForm} showTaskForm={showTaskForm} />
+        
+        {showTaskForm && 
+          <AddTask 
+            onAddTask={addTask} 
+            onShowAlert={showAlert}
+          />}
+        
+        <div className="container-task">
+        {tasks.length > 0 
+          ? <Tasks 
+              tasks={tasks} 
+              onDelete={deleteTask}
+              onToggleReminder={toggleReminder}
+            />
+          : 'There is no message'
+          }
+        </div>
       </div>
     </div>
   );

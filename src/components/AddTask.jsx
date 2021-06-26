@@ -1,6 +1,7 @@
 import React , { useState }from 'react'
 
-function AddTask({ onAddTask }) {
+function AddTask({ onAddTask, onShowAlert }) {
+
   const [text, setText] = useState('');
   const [date, setDate] = useState('');
   const [reminder, setReminder] = useState(false);
@@ -9,11 +10,14 @@ function AddTask({ onAddTask }) {
     
     e.preventDefault();
 
-    if(!text || !date) {
-    
-      alert('Fill the Task field')
+    if(!text) {
+      onShowAlert('Fill the task field')
       return
-      
+    }
+
+    if (!date) {
+      onShowAlert('Fill the "Finish at" field')
+      return
     }
 
     const currentDate = new Date().getTime();
@@ -22,7 +26,7 @@ function AddTask({ onAddTask }) {
     const dateFromFormDay = new Date(date).getDate() + 1;
 
     if(currentDate > dateFromForm && currentDateDay > dateFromFormDay) {
-      alert('Date must be after the currenty date')
+      onShowAlert('Date must be equal or after the currenty date')
       return;
     }
 
